@@ -80,7 +80,7 @@ for i, song in enumerate(songs):
 print(__name__)
 print(__doc__)
 # print(__file__)
-print(globals())
+#print(globals())
 
 #%%
 # Importing from another script

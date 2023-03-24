@@ -15,7 +15,7 @@ the_beatles = [john, paul, george, ringo]
 
 
 #%%
-def demonstrate_annotations(title, year):
+def demonstrate_annotations(title: str, year: int) -> str:
     """Demonstrates how to use annotations of
     function parameters/arguments (<arg>: <type>) and of function return type (def f(...) -> <type>:).
     - print the function parameters/arguments
@@ -23,7 +23,10 @@ def demonstrate_annotations(title, year):
     - print the name and the docstring of this function
     - return a formatted string (including function parameters/arguments)
     """
-
+    print(title + ', ' + str(year))
+    print(demonstrate_annotations.__annotations__)
+    print(demonstrate_annotations.__doc__)
+    return f'{demonstrate_annotations.__name__}(\'{title}\', {year})'
 
 #%%
 # Test demonstrate_annotations(title, year)
@@ -38,12 +41,13 @@ def show_song(title, author='George Harrison', year=1969):
     - print locals()
     - print the function arguments/parameters in one line
     """
+    print(locals())
 
 
 #%%
 # Test show_song(title, author='George Harrison', year=1969)
-show_song(song)
-
+# show_song(song, year=1970, author='GH')
+show_song(year=1970, title=song, author='GH')
 
 #%%
 def use_flexible_arg_list(band: str, *members):
@@ -51,12 +55,14 @@ def use_flexible_arg_list(band: str, *members):
     - print the type of the 'members' argument
     - print the band name and the list of band members in one line
     """
-
+    # print(type(members))
+    b = band + ':' if members else band
+    print(f'{b} {", ".join([m for m in members])}')
 
 #%%
 # Test use_flexible_arg_list(band: str, *members)
 use_flexible_arg_list('The Beatles', *the_beatles)
-use_flexible_arg_list('The Beatles')
+# use_flexible_arg_list('The Beatles')
 
 
 #%%
@@ -65,11 +71,16 @@ def use_all_categories_of_args(band, *members, is_active=True, **details):
     - print the type of the 'details' argument
     - print all arguments/parameters, including the keyword arguments/parameters, in one line
     """
-
+    # print(type(details))
+    b = band + ':' if members else band
+    m = ", ".join([m for m in members])
+    a = '(active)' if is_active else '(not active)'
+    d = ', '.join([str(k) + ': ' + str(v) for k, v in details.items()])
+    return f'{b}{m} {a}; {d}'
 
 #%%
 # Test use_all_categories_of_args(band, *members, is_active=True, **details)
-use_all_categories_of_args('The Beatles', is_active=False, start=1962, end=1970)
-use_all_categories_of_args('The Beatles', *the_beatles, is_active=False, start=1962, end=1970)
-
+# print(use_all_categories_of_args('The Beatles', is_active=False, start=1962, end=1970))
+print(use_all_categories_of_args('The Beatles', *the_beatles, is_active=False, start=1962, end=1970))
+#%%
 
