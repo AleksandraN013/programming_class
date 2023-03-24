@@ -239,6 +239,8 @@ def band_details(f_to_decorate):
             return value
         return wrapper_decorator
     """
+    import functools
+    @functools.wraps(f_to_decorate)
     def wrap(*args, **kwargs):
         print('--------------------------')
         v = f_to_decorate(*args, **kwargs)
